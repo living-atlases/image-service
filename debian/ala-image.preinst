@@ -24,8 +24,6 @@ if ! getent passwd ${user} >/dev/null; then
           --disabled-login \
           --ingroup ${group} \
           --no-create-home \
-          #--home /nonexistent \
-          --gecos "${user}" \
           --shell /bin/false \
           ${user} >/dev/null
 fi
