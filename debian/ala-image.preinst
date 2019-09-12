@@ -28,4 +28,6 @@ if ! getent passwd ${user} >/dev/null; then
           ${user} >/dev/null
 fi
 
+#DEBHELPER#
+
 echo Installing ala-image

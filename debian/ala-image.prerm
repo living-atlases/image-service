@@ -17,4 +17,6 @@
 . /usr/share/dbconfig-common/dpkg/prerm.pgsql
 dbc_go ala-image "$@"
 
+#DEBHELPER#
+
 echo Removing ala-image

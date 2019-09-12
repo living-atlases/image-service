@@ -1,6 +1,7 @@
 image-service (1.0.6-5) unstable; urgency=medium
 
   * Fix adduser params
+  * Added missing DEBHELPER
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 12 Sep 2019 18:29:37 +0200
 
