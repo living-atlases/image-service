@@ -1,0 +1,18 @@
+image-service (1.0.6-3) unstable; urgency=medium
+
+  * Fix perms to jar
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 12 Sep 2019 13:52:33 +0200
+
+image-service (1.0.6-2) unstable; urgency=medium
+
+  * Fix typo in preinstall on adduser
+  * image-service conf
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 12 Sep 2019 12:47:19 +0200
+
+image-service (1.0.6-1) unstable; urgency=low
+
+  * Initial release
+
+ -- ALA Development Team <support@ala.org.au>  Thu, 12 Sep 2019 09:41:39 +0200
