@@ -43,13 +43,13 @@ case "${1}" in
         pathfind deluser
         if [ $? = 0 ] ;
         then
-            deluser --quiet --system ${_USERNAME}
+            deluser --quiet ${_USERNAME}
         fi
 
         pathfind delgroup
         if [ $? = 0 ] ;
         then
-            delgroup --quiet --system --only-if-empty ${_GROUPNAME} || true
+            delgroup --quiet --only-if-empty ${_GROUPNAME} || true
         fi
         ;;
 
