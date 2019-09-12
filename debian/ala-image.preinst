@@ -24,6 +24,7 @@ if ! getent passwd ${user} >/dev/null; then
           --disabled-login \
           --ingroup ${group} \
           --no-create-home \
+          --home /nonexistent \
           --shell /bin/false \
           --system \
           --quiet \
