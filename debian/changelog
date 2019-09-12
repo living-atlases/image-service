@@ -1,3 +1,9 @@
+image-service (1.0.6-6) unstable; urgency=medium
+
+  * adduser as system user
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 12 Sep 2019 21:34:51 +0200
+
 image-service (1.0.6-5) unstable; urgency=medium
 
   * Fix adduser params
