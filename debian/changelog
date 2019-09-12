@@ -1,3 +1,11 @@
+image-service (1.0.6-4) unstable; urgency=medium
+
+  * Correct exec-jar
+  * Fix user remove
+  * Trying to enable/disable service on install/uninstall
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 12 Sep 2019 17:47:10 +0200
+
 image-service (1.0.6-3) unstable; urgency=medium
 
   * Fix perms to jar

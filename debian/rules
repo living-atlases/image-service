@@ -10,7 +10,7 @@
 # export DH_VERBOSE=1
 
 %:
-	dh $@
+	dh $@ --with-systemd
 
 override_dh_fixperms:
 	dh_fixperms
@@ -22,5 +22,5 @@ override_dh_install:
 #	man install
 #	install don't allow to rename files (like wars), so we copy here the file we want to install with the package
 # $(CURDIR) is the repo directory
-	cp $(CURDIR)/build/libs/image-service-1.0.6.jar $(CURDIR)/build/libs/image-service.jar
+	cp $(CURDIR)/build/libs/image-service-1.0.6-exec.jar $(CURDIR)/build/libs/image-service.jar
 	dh_install # calls default *.install and *.dirs installation
