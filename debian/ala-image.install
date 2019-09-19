@@ -4,5 +4,3 @@ debian/image-service.conf opt/atlas/image-service
 debian/data/image-service/config/image-service-config.template data/image-service/config
 debian/data/image-service/config/logback.groovy data/image-service/config
 debian/data/image-service/setup/image-service-export.sql usr/share/dbconfig-common/data/ala-image/install/pgsql
-debian/data/image-service/setup/licence_mappings.csv data/image-service/setup/
-debian/data/image-service/setup/licences.csv data/image-service/setup/

@@ -1,3 +1,16 @@
+image-service (1.0.6-9) unstable; urgency=medium
+
+  * license files removed
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 19 Sep 2019 12:36:14 +0200
+
+image-service (1.0.6-8) unstable; urgency=medium
+
+  * Updated config with generated via ansible
+  * Update mysql procedure
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 18 Sep 2019 23:22:11 +0200
+
 image-service (1.0.6-7) unstable; urgency=medium
 
   * deluser postrm fix

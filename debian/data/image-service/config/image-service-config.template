@@ -1,20 +1,20 @@
 grails:
-  serverURL: "http://dev.ala.org.au:8080"
+  serverURL: "http://localhost:8080"
 
 security:
   cas:
-    appServerName: "http://dev.ala.org.au:8080"
-    bypass: True
-    disableCAS: True
+    appServerName: "http://localhost:8080"
+    bypass: true
+    disableCAS: true
   apikey:
     ip:
-      whitelist: ""
+      whitelist: 
     check:
-      serviceUrl: https://auth.ala.org.au/apikey/ws/check?apikey=
+      serviceUrl: http://auth.l-a.site/apikey/ws/check?apikey=
 info:
   app:
     name: 'image-service'
-    version: '{{ image_service_version }}'
+    version: '1.0.6'
     grailsVersion: '3.2.11'
 
 hibernate:
@@ -28,32 +28,31 @@ dataSource:
 
 imageservice:
   imagestore:
-    root: /data/image-service/store
+    root: "/data/image-service/store"
   apache:
     root: "http://localhost:8880/store/"
     multiple_roots: "http://localhost:8880/store/"
-
     exportDir: "/data/image-service/exports"
 
 # skin
 skin:
-  layout: main
+  layout: generic
   favicon: "https://www.ala.org.au/wp-content/themes/ala-wordpress-theme/img/favicon/favicon-16x16.png"
-  orgNameLong: Atlas
+  orgNameLong: Living Atlas Of Wakanda
 
 collectory:
-  baseURL: "https://collections.ala.org.au"
+  baseURL: "http://collections.l-a.site"
 biocache:
-  baseURL: "https://biocache.ala.org.au"
+  baseURL: "https://biocache.l-a.site"
 
 # header block
 headerAndFooter:
   version: 2
   baseURL: "https://wp2019.ala.org.au/commonui-bs3-2019"
 ala:
-  baseURL: "https://www.ala.org.au"
+  baseURL: "http://l-a.site"
 bie:
-  baseURL: "https://bie.ala.org.au"
+  baseURL: "http://species.l-a.site"
   searchPath: "/search"
 
 # swagger configuration

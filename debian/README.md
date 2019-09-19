@@ -61,3 +61,12 @@ Also you can install `dbconfig-no-thanks` to avoid db questions.
 
 - [ ] pg_instance, extensions: ["citext", "pgcrypto"], # from ala-images.yml playbook
 - [ ] postgis_template 
+- [ ] data/image-service/setup/image-service-export.sql is dependent of the images domain
+
+## CODE DUPLICATED 
+
+Code duplicated from `ala-install` of similar:
+
+- data/image-service/setup/image-service-export.sql
+- data/image-service/config/image-service-config.template
+- data/image-service/config/logback.groovy
