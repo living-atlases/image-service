@@ -20,6 +20,7 @@ set -e
 chown -R image-service:image-service /data/image-service
 chown -R image-service:image-service /opt/atlas/image-service
 chown -R image-service:image-service /var/log/atlas/image-service
+chown -R postgres:postgres /data/image-service/exports
 
 case "$1" in
     configure)
@@ -37,5 +38,8 @@ dbc_generate_include_args="-o template_infile=/data/image-service/config/image-s
 dbc_go ala-image "$@"
 
 # TODO: psql -d ala-image -c "ALTER ROLE ala-image WITH SUPERUSER"
+
+echo "For new installs, to finish installation use the admin screen to load the licence information in licence_mappings.csv and licences.csv:"
+echo "https://github.com/AtlasOfLivingAustralia/ala-install/tree/master/ansible/roles/image-service/files"
 
 echo ala-image installed
