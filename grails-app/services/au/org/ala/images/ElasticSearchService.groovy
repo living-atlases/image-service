@@ -285,12 +285,7 @@ class ElasticSearchService {
         log.debug "search params: ${params}"
         SearchRequest request = buildSearchRequest(params, searchCriteria, grailsApplication.config.elasticsearch.indexName as String)
         SearchResponse searchResponse = client.search(request, RequestOptions.DEFAULT)
-        def imageList = []
-        if (searchResponse.hits) {
-            searchResponse.hits.each { hit ->
-                imageList << hit.getSourceAsMap()
-            }
-        }
+        final imageList = searchResponse.hits.collect { hit -> hit.getSourceAsMap() } ?: []
         QueryResults<Image> qr = new QueryResults<Image>()
         qr.list = imageList
         qr.totalCount = searchResponse.hits.totalHits.value
@@ -394,12 +389,7 @@ class ElasticSearchService {
         log.debug "search params: ${params}"
         SearchRequest request = buildSearchRequest(JsonOutput.toJson(query), params, grailsApplication.config.elasticsearch.indexName as String)
         SearchResponse searchResponse = client.search(request, RequestOptions.DEFAULT)
-        def imageList = []
-        if (searchResponse.hits) {
-            searchResponse.hits.each { hit ->
-                imageList << Image.findByImageIdentifier(hit.id)
-            }
-        }
+        final imageList = searchResponse.hits ? Image.findAllByImageIdentifierInList(searchResponse.hits*.id) ?: [] : []
         QueryResults<Image> qr = new QueryResults<Image>()
         qr.list = imageList
         qr.totalCount = searchResponse.hits.totalHits.value
@@ -761,16 +751,11 @@ class ElasticSearchService {
             ct.stop(true)
 
             ct = new CodeTimer("Object retrieval (${searchResponse.hits.hits.length} of ${searchResponse.hits.totalHits} hits)")
-            def imageList = []
-            if (searchResponse.hits) {
-                searchResponse.hits.each { hit ->
-                    def image =  Image.findByImageIdentifier(hit.id)
-                    image.metadata = null
-                    image.tags = null
-                    def imageAsMap = asMap(image)
-                    imageList << imageAsMap
-                }
-            }
+            final imageList = searchResponse.hits ? Image.findAllByImageIdentifierInList(searchResponse.hits*.id)?.collect { image ->
+                image.metadata = null
+                image.tags = null
+                asMap(image)
+            } ?: [] : []
             ct.stop(true)
 
             def resultsKeyedByValue = [:]
