@@ -31,7 +31,7 @@
         </ul>
     </g:if>
     <script type="text/javascript">
-        $(".btnDeleteCriteria").click(function(e) {
+        $(".btnDeleteCriteria").on('click', function(e) {
             e.preventDefault();
             var criteriaId = $(this).parent().parent().attr("searchCriteriaId");
             if (criteriaId) {
@@ -44,7 +44,7 @@
             }
         });
 
-        $(".btnEditCriteria").click(function(e) {
+        $(".btnEditCriteria").on('click', function(e) {
             e.preventDefault();
             var criteriaId = $(this).parents("tr[searchCriteriaId]").attr("searchCriteriaId");
             if (criteriaId) {

@@ -37,7 +37,7 @@
 
     $(document).ready(function() {
 
-        $("#btnDoSearch").click(function(e) {
+        $("#btnDoSearch").on('click', function(e) {
             e.preventDefault();
             window.location.href = "${createLink(action:'indexSearch')}?q=" + encodeURIComponent($("#q").val());
         });

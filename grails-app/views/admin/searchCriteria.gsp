@@ -27,19 +27,19 @@
 
             $(document).ready(function() {
 
-                $("#btnAddCriteria").click(function(e) {
+                $("#btnAddCriteria").on('click', function(e) {
                     e.preventDefault();
                     window.location = "${createLink(controller:'admin', action:'newSearchCriteriaDefinition')}";
                 });
 
-                $(".btnEditCriteria").click(function(e) {
+                $(".btnEditCriteria").on('click', function(e) {
                     var criteriaId = $(this).parents("tr[searchCriteriaDefinitionId]").attr("searchCriteriaDefinitionId");
                     if (criteriaId) {
                         window.location = "${createLink(controller: 'admin', action:'editSearchCriteriaDefinition')}?searchCriteriaDefinitionId=" + criteriaId;
                     }
                 });
 
-                $(".btnDeleteCriteria").click(function(e) {
+                $(".btnDeleteCriteria").on('click', function(e) {
                     var criteriaId = $(this).parents("tr[searchCriteriaDefinitionId]").attr("searchCriteriaDefinitionId");
                     if (criteriaId) {
                         if (confirm("Are you sure you want to delete this search criteria definition?")) {
@@ -48,12 +48,12 @@
                     }
                 });
 
-                $("#btnImport").click(function(e) {
+                $("#btnImport").on('click', function(e) {
                     e.preventDefault();
                     window.location="${createLink(action:'selectImportFile', params:[importType:'searchCriteriaDefinitions'])}";
                 });
 
-                $("#btnExport").click(function(e) {
+                $("#btnExport").on('click', function(e) {
                     e.preventDefault();
                     window.location = "${createLink(action:'exportSearchCriteriaDefinitions')}";
                 });

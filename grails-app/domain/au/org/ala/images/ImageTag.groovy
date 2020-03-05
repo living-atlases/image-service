@@ -2,8 +2,7 @@ package au.org.ala.images
 
 class ImageTag {
 
-    Tag tag
-    Image image
+    static belongsTo = [ image: Image, tag: Tag]
 
     static constraints = {
         tag nullable: false

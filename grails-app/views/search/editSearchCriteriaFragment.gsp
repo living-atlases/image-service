@@ -40,12 +40,12 @@
         $("#criteriaDetail").html(content);
     });
 
-    $("#btnCancelEdit").click(function(e) {
+    $("#btnCancelEdit").on('click', function(e) {
         e.preventDefault();
         imgvwr.hideModal();
     });
 
-    $("#btnSaveCriteria").click(function(e) {
+    $("#btnSaveCriteria").on('click', function(e) {
         var formData = $("#criteriaForm").serialize();
         var errorDiv = $("#errorMessageDiv");
         errorDiv.css("display",'none');

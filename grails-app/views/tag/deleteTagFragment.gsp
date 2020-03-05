@@ -14,12 +14,12 @@
 </div>
 <script>
 
-    $("#btnCancelDeleteTag").click(function(e) {
+    $("#btnCancelDeleteTag").on('click', function(e) {
         e.preventDefault();
         $('#tagModal').modal('hide');
     });
 
-    $("#btnDeleteTag").click(function(e) {
+    $("#btnDeleteTag").on('click', function(e) {
         e.preventDefault();
         $.ajax("${createLink(controller:'webService', action:'deleteTag')}?tagId=${tagInstance.id}").done(function() {
             $('#tagModal').modal('hide');

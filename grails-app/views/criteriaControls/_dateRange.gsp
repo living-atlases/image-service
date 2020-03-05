@@ -57,7 +57,7 @@
 
     $(document).ready(function() {
 
-        $(".radioButton").click(function(e) {
+        $(".radioButton").on('click', function(e) {
             var operator = $(this).val();
             if (operator == "bt") {
                 $(".dateRangeOther").css("display", "inline-block");

@@ -31,7 +31,7 @@
 
 <script>
 
-    $("#btnCancelDataFileUpload").click(function(e) {
+    $("#btnCancelDataFileUpload").on('click', function(e) {
         e.preventDefault();
         imgvwr.hideModal();
     });

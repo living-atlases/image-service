@@ -45,7 +45,7 @@
 
     <script>
 
-        jQuery("#fieldName").autocomplete("${grailsApplication.config.grails.serverURL}${createLink(controller:'webService', action:'darwinCoreTerms')}", {
+        jQuery("#fieldName").autocomplete("${createLink(absolute: true, controller:'webService', action:'darwinCoreTerms')}", {
             dataType: 'jsonp',
             parse: function (data) {
                 var rows = new Array();
@@ -67,12 +67,12 @@
             selectFirst: false
         });
 
-        $("#btnCancelEditFieldDefinition").click(function(e) {
+        $("#btnCancelEditFieldDefinition").on('click', function(e) {
             e.preventDefault();
             imgvwr.hideModal();
         });
 
-        $("#btnSaveFieldDefinition").click(function(e) {
+        $("#btnSaveFieldDefinition").on('click', function(e) {
             e.preventDefault();
             var fieldName = encodeURIComponent($("#fieldName").val());
             var fieldType = encodeURIComponent($("#fieldType").val());

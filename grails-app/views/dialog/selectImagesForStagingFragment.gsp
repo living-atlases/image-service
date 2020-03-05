@@ -29,12 +29,12 @@
 
     <script>
 
-        $("#btnCancelUploadImages").click(function(e) {
+        $("#btnCancelUploadImages").on('click', function(e) {
             e.preventDefault();
             imgvwr.hideModal();
         });
 
-        $("#btnUploadImages").click(function(e) {
+        $("#btnUploadImages").on('click', function(e) {
             e.preventDefault();
             $("#uploadingMessage").css("display", "block");
             $("#stageImagesForm").submit();

@@ -164,13 +164,13 @@
 </table>
 <script>
     $(document).ready(function() {
-        $("#btnResetLinearScale").click(function (e) {
+        $("#btnResetLinearScale").on('click', function (e) {
             e.preventDefault();
             imgvwr.areYouSure({
                 title: "Reset calibration for this image?",
                 message: "Are you sure you wish to reset the linear scale for this image?",
                 affirmativeAction: function () {
-                    var url = "${grailsApplication.config.grails.serverURL}${createLink(controller:'webService', action:'resetImageCalibration')}?imageId=${imageInstance.imageIdentifier}";
+                    var url = "${createLink(absolute: true, controller:'webService', action:'resetImageCalibration')}?imageId=${imageInstance.imageIdentifier}";
                     $.ajax(url).done(function (result) {
                         window.location.reload(true);
                     });

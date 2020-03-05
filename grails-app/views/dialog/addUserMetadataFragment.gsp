@@ -20,12 +20,12 @@
 
     <script>
 
-        $("#btnCancelAddUserMetaData").click(function(e) {
+        $("#btnCancelAddUserMetaData").on('click', function(e) {
             e.preventDefault();
             imgvwr.hideModal();
         });
 
-        $("#btnAddNewUserMetadata").click(function(e) {
+        $("#btnAddNewUserMetadata").on('click', function(e) {
             e.preventDefault();
             var key = $("#metaDataKey").val();
             var value = $("#metaDataValue").val();

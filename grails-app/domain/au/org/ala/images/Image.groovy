@@ -60,7 +60,7 @@ class Image {
 
     Integer squareThumbSize
 
-    static hasMany = [keywords:ImageKeyword, metadata: ImageMetaDataItem, tags: ImageTag]
+    static hasMany = [keywords:ImageKeyword, metadata: ImageMetaDataItem, tags: ImageTag, outSourcedJobs: OutsourcedJob]
 
     static constraints = {
         parent nullable: true

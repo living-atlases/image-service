@@ -17,20 +17,28 @@ class TagSpec extends Specification {
 
     @Shared RestBuilder rest = new RestBuilder()
 
+    def grailsApplication
+
+    private String getBaseUrl() {
+        def serverContextPath = grailsApplication.config.getProperty('server.contextPath', String, '')
+        def url = "http://localhost:${serverPort}${serverContextPath}"
+        return url
+    }
+
     def setup() {}
 
     def cleanup() {}
 
     void "test home page"() {
         when:
-        RestResponse resp = rest.get("http://localhost:${serverPort}")
+        RestResponse resp = rest.get("${baseUrl}")
         then:
         resp.status == 200
     }
 
     void "test create tag"() {
         when:
-        RestResponse resp = rest.put("http://localhost:${serverPort}/ws/tag?tagPath=Birds/Colour/Red")
+        RestResponse resp = rest.put("${baseUrl}/ws/tag?tagPath=Birds/Colour/Red")
         def jsonResponse = new JsonSlurper().parseText(resp.body)
         then:
         resp.status == 200
@@ -39,7 +47,7 @@ class TagSpec extends Specification {
 
     void "test get tag model"() {
         when:
-        RestResponse resp = rest.get("http://localhost:${serverPort}/ws/tags")
+        RestResponse resp = rest.get("${baseUrl}/ws/tags")
         def jsonResponse = new JsonSlurper().parseText(resp.body)
         then:
         resp.status == 200
@@ -52,7 +60,7 @@ class TagSpec extends Specification {
         //upload an image
         MultiValueMap<String, String> form = new LinkedMultiValueMap<String, String>()
         form.add("imageUrl", "https://www.ala.org.au/app/uploads/2019/05/palm-cockatoo-by-Alan-Pettigrew-1920-1200-CCBY-28072018-640x480.jpg")
-        RestResponse resp = rest.post("http://localhost:${serverPort}/ws/uploadImage", {
+        RestResponse resp = rest.post("${baseUrl}/ws/uploadImage", {
             contentType("application/x-www-form-urlencoded")
             body(form)
         })
@@ -63,15 +71,15 @@ class TagSpec extends Specification {
         println("Created image: " + imageId)
 
         //create a tag
-        RestResponse createTag = rest.put("http://localhost:${serverPort}/ws/tag?tagPath=Birds/Colour/Blue")
+        RestResponse createTag = rest.put("${baseUrl}/ws/tag?tagPath=Birds/Colour/Blue")
         def tagId = new JsonSlurper().parseText(createTag.body).tagId
 
         //remove existing tags if present
-        RestResponse tagRemoveResp = rest.delete("http://localhost:${serverPort}/ws/tag/${tagId}/image/${imageId}")
+        RestResponse tagRemoveResp = rest.delete("${baseUrl}/ws/tag/${tagId}/image/${imageId}")
         println("Delete response status: " + tagRemoveResp.body)
 
         //tag the image
-        RestResponse tagResp = rest.put("http://localhost:${serverPort}/ws/tag/${tagId}/image/${imageId}")
+        RestResponse tagResp = rest.put("${baseUrl}/ws/tag/${tagId}/image/${imageId}")
         def taggedJson = new JsonSlurper().parseText(tagResp.body)
 
         println("Create Response status: " + resp.status)

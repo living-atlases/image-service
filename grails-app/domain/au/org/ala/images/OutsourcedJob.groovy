@@ -3,10 +3,11 @@ package au.org.ala.images
 class OutsourcedJob {
 
     String ticket
-    Image image
     Date dateCreated
     ImageTaskType taskType
     int expectedDurationInMinutes
+
+    static belongsTo = [image: Image]
 
     static constraints = {
         ticket nullable: false

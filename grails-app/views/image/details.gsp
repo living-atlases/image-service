@@ -150,13 +150,13 @@
             var dest = $(tabDiv);
             dest.find('.metadataSource-container').html("Loading...");
             var source = dest.attr("metadataSource");
-            $.ajax("${grailsApplication.config.grails.serverURL}${createLink(controller:'image', action:'imageMetadataTableFragment', id: imageInstance.id)}?source=" + source).done(function(content) {
+            $.ajax("${createLink(absolute: true, controller:'image', action:'imageMetadataTableFragment', id: imageInstance.id)}?source=" + source).done(function(content) {
                 dest.find('.metadataSource-container').html(content);
             });
         }
 
         function refreshCoreMetadata() {
-            $.ajax("${grailsApplication.config.grails.serverURL}${createLink(controller:'image', action:'coreImageMetadataTableFragment', id: imageInstance.id)}").done(function(content) {
+            $.ajax("${createLink(absolute: true, controller:'image', action:'coreImageMetadataTableFragment', id: imageInstance.id)}").done(function(content) {
                 $('#imageTabs').find('.coreMetadataContainer').html(content);
             });
         }
@@ -164,7 +164,7 @@
         <auth:ifAnyGranted roles="${CASRoles.ROLE_ADMIN}">
 
         function refreshAuditTrail() {
-            $.ajax("${grailsApplication.config.grails.serverURL}${createLink(controller: 'image', action:'imageAuditTrailFragment', id: imageInstance.id)}").done(function(content) {
+            $.ajax("${createLink(absolute: true, controller: 'image', action:'imageAuditTrailFragment', id: imageInstance.id)}").done(function(content) {
                 $("#tabAuditMessages").html(content);
             });
         }
@@ -213,15 +213,15 @@
                 }
             });
 
-            $("#btnViewImage").click(function(e) {
+            $("#btnViewImage").on('click', function(e) {
                 e.preventDefault();
-                window.location = "${grailsApplication.config.grails.serverURL}${createLink(controller:'image', action:'view', id: imageInstance.imageIdentifier)}";
+                window.location = "${createLink(absolute: true, controller:'image', action:'view', id: imageInstance.imageIdentifier)}";
             });
 
-            $("#btnRegen").click(function(e) {
+            $("#btnRegen").on('click', function(e) {
                 e.preventDefault();
 
-                $.ajax("${grailsApplication.config.grails.serverURL}${createLink(controller:'image', action:'scheduleArtifactGeneration', id: imageInstance.imageIdentifier)}").done(function(data) {
+                $.ajax("${createLink(absolute: true, controller:'image', action:'scheduleArtifactGeneration', id: imageInstance.imageIdentifier)}").done(function(data) {
                     console.log(data);
                     alert('Regeneration scheduled - ' + data.message);
                 }).fail(function(){
@@ -229,14 +229,14 @@
                 });
             });
 
-            $("#btnDeleteImage").click(function(e) {
+            $("#btnDeleteImage").on('click', function(e) {
                 e.preventDefault();
                 var options = {
                     message: "Warning! This operation cannot be undone. Are you sure you wish to permanently delete this image?",
                     title: "Delete this image",
                     affirmativeAction: function() {
-                        $.ajax("${grailsApplication.config.grails.serverURL}${createLink(controller:'image', action:'deleteImage', id: imageInstance.imageIdentifier)}").done(function() {
-                            window.location = "${grailsApplication.config.grails.serverURL}${createLink(controller:'search', action:'list')}";
+                        $.ajax("${createLink(absolute: true, controller:'image', action:'deleteImage', id: imageInstance.imageIdentifier)}").done(function() {
+                            window.location = "${createLink(absolute: true, controller:'search', action:'list')}";
                         });
                     }
                 };
@@ -249,7 +249,7 @@
                     $(this).qtip({
                         content: {
                             text: function(event, api) {
-                                $.ajax("${grailsApplication.config.grails.serverURL}${createLink(controller:'image', action:"imageTooltipFragment")}/" + imageId).then(function(content) {
+                                $.ajax("${createLink(absolute: true, controller:'image', action:"imageTooltipFragment")}/" + imageId).then(function(content) {
                                     api.set("content.text", content);
                                 },
                                 function(xhr, status, error) {
@@ -265,7 +265,7 @@
         });
 
         function loadTags() {
-            $.ajax("${grailsApplication.config.grails.serverURL}${createLink(controller: 'image', action:'tagsFragment', id:imageInstance.id)}").done(function(html) {
+            $.ajax("${createLink(absolute: true, controller: 'image', action:'tagsFragment', id:imageInstance.id)}").done(function(html) {
                 $("#tagsSection").html(html);
             });
         }

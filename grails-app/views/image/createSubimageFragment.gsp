@@ -16,12 +16,12 @@
 </div>
 
 <script>
-    $("#btnCancelSubimage").click(function(e) {
+    $("#btnCancelSubimage").on('click', function(e) {
         e.preventDefault();
         imgvwr.hideModal();
     });
 
-    $("#btnCreateSubimage2").click(function(e) {
+    $("#btnCreateSubimage2").on('click', function(e) {
         e.preventDefault();
         var url = "${grailsApplication.config.grails.serverURL}${raw(createLink(controller:'webService', action:'createSubimage', id: imageInstance.imageIdentifier,  params:[x: x, y: y, width: width, height: height]))}&description=" + encodeURIComponent($('#description').val());
         $.ajax(url).done(function(results) {

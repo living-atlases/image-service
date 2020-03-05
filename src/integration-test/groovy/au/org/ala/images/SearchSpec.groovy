@@ -18,6 +18,14 @@ class SearchSpec extends Specification {
 
     @Shared RestBuilder rest = new RestBuilder()
 
+    def grailsApplication
+
+    private String getBaseUrl() {
+        def serverContextPath = grailsApplication.config.getProperty('server.contextPath', String, '')
+        def url = "http://localhost:${serverPort}${serverContextPath}"
+        return url
+    }
+
     def setup() {}
 
     def cleanup() {}
@@ -30,12 +38,12 @@ class SearchSpec extends Specification {
         //first upload an image
         def testUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Red_kangaroo_-_melbourne_zoo.jpg/800px-Red_kangaroo_-_melbourne_zoo.jpg"
 
-        RestResponse uploadResponse = rest.post("http://localhost:${serverPort}/ws/uploadImagesFromUrls", {
+        RestResponse uploadResponse = rest.post("${baseUrl}/ws/uploadImagesFromUrls", {
             json {
                 [images: [[
-                          sourceUrl   : testUrl,
-                          occurrenceID: occurrenceID
-                  ]]]
+                                  sourceUrl   : testUrl,
+                                  occurrenceID: occurrenceID
+                          ]]]
             }
         })
         def jsonUploadResponse = new JsonSlurper().parseText(uploadResponse.body)
@@ -58,7 +66,7 @@ class SearchSpec extends Specification {
 
 
         while (hasBacklog && counter < MAX_CHECKS) {
-            RestResponse statsResp = rest.get("http://localhost:${serverPort}/ws/backgroundQueueStats")
+            RestResponse statsResp = rest.get("${baseUrl}/ws/backgroundQueueStats")
             def json = new JsonSlurper().parseText(statsResp.body)
             if (json.queueLength > 0) {
                 println("Queue length: " + json.queueLength)
@@ -69,13 +77,13 @@ class SearchSpec extends Specification {
             counter += 1
         }
 
-        RestResponse countsResp = rest.get("http://localhost:${serverPort}/ws/search")
+        RestResponse countsResp = rest.get("${baseUrl}/ws/search")
         def jsonCount = new JsonSlurper().parseText(countsResp.body)
         jsonCount
 
 //        def occurrenceID = "f4c13adc-2926-44c8-b2cd-fb2d62378a1a"
         //search by occurrence ID
-        RestResponse resp = rest.post("http://localhost:${serverPort}/ws/findImagesByMetadata", {
+        RestResponse resp = rest.post("${baseUrl}/ws/findImagesByMetadata", {
             json {
                 [
                         "key"   : "occurrenceid",

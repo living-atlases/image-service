@@ -18,17 +18,17 @@
 </div>
 <script>
 
-    $("#btnCancelCalibrateImageScale").click(function(e) {
+    $("#btnCancelCalibrateImageScale").on('click', function(e) {
         e.preventDefault();
         imgvwr.hideModal();
     });
 
-    $("#btnCalibrateImageScale").click(function(e) {
+    $("#btnCalibrateImageScale").on('click', function(e) {
         e.preventDefault();
         var units = $("#units").val();
         var pixelLength = $("#pixelLength").val();
         var actualLength = $("#mmLength").val();
-        $.ajax("${grailsApplication.config.grails.serverURL}${createLink(controller:'webService', action:'calibrateImageScale', params:[imageId: imageInstance.imageIdentifier])}&units=" + units + "&pixelLength=" + pixelLength + "&actualLength=" + actualLength).done(function() {
+        $.ajax("${createLink(absolute: true, controller:'webService', action:'calibrateImageScale', params:[imageId: imageInstance.imageIdentifier])}&units=" + units + "&pixelLength=" + pixelLength + "&actualLength=" + actualLength).done(function() {
             imgvwr.hideModal();
         });
 

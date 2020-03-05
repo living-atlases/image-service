@@ -4,12 +4,15 @@ class Tag {
 
     String path
 
+    static hasMany = [ imageTags: ImageTag ]
+
     static constraints = {
         path nullable: false
     }
 
     static mapping = {
         path length: 2048
+        imageTags lazy: true
     }
 
     static transients = [ "label"]

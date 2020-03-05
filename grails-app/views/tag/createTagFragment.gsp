@@ -23,12 +23,12 @@
 </div>
 <script>
 
-    $("#btnCancelAddTag").click(function(e) {
+    $("#btnCancelAddTag").on('click', function(e) {
         e.preventDefault();
         $('#tagModal').modal('hide');
     });
 
-    $("#btnAddTag").click(function(e) {
+    $("#btnAddTag").on('click', function(e) {
         e.preventDefault();
         var tagPath = $("#tag").val();
         if (tagPath) {

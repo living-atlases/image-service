@@ -123,69 +123,69 @@
 
     $(document).ready(function() {
 
-        $("#btnMissingImagesCheck").click(function(e) {
+        $("#btnMissingImagesCheck").on('click', function(e) {
             e.preventDefault();
             window.location = "${createLink(action:'checkForMissingImages')}";
         });
 
-        $("#btnRegenArtifacts").click(function(e) {
+        $("#btnRegenArtifacts").on('click', function(e) {
             e.preventDefault();
             $.ajax("${createLink(controller:'webService', action:'scheduleArtifactGeneration')}").done(function() {
                 window.location = "${createLink(action:'tools')}";
             });
         });
 
-        $("#btnRegenThumbnails").click(function(e) {
+        $("#btnRegenThumbnails").on('click', function(e) {
             e.preventDefault();
             $.ajax("${createLink(controller:'webService', action:'scheduleThumbnailGeneration')}").done(function() {
                 window.location = "${createLink(action:'tools')}";
             });
         });
 
-        $("#btnRebuildKeywords").click(function(e) {
+        $("#btnRebuildKeywords").on('click', function(e) {
             e.preventDefault();
             $.ajax("${createLink(controller:'webService', action:'scheduleKeywordRegeneration')}").done(function() {
                 window.location = "${createLink(action:'tools')}";
             });
         });
 
-        $("#btnRematchLicencesAllImages").click(function(e) {
+        $("#btnRematchLicencesAllImages").on('click', function(e) {
             e.preventDefault();
             window.location = "${createLink(action:'rematchLicenses')}";
         });
 
-        $("#btnClearQueues").click(function(e) {
+        $("#btnClearQueues").on('click', function(e) {
             e.preventDefault();
             window.location = "${createLink(action:'clearQueues')}";
         });
 
-        $("#btnImportFromLocalInbox").click(function(e) {
+        $("#btnImportFromLocalInbox").on('click', function(e) {
             e.preventDefault();
             window.location = "${createLink(action:'localIngest')}";
         });
 
-        $("#btnDeleteIndex").click(function(e) {
+        $("#btnDeleteIndex").on('click', function(e) {
             e.preventDefault();
             window.location = "${createLink(action:'reinitialiseImageIndex')}";
         });
 
 
-        $("#btnReindexAllImages").click(function(e) {
+        $("#btnReindexAllImages").on('click', function(e) {
             e.preventDefault();
             window.location = "${createLink(action:'reindexImages')}";
         });
 
-        $("#btnSearchIndex").click(function(e) {
+        $("#btnSearchIndex").on('click', function(e) {
             e.preventDefault();
             window.location = "${createLink(action:'indexSearch')}";
         });
 
-        $("#btnClearCollectoryCache").click(function(e) {
+        $("#btnClearCollectoryCache").on('click', function(e) {
             e.preventDefault();
             window.location = "${createLink(action:'clearCollectoryCache')}";
         });
 
-        $("#btnPurgeDeletedImages").click(function(e) {
+        $("#btnPurgeDeletedImages").on('click', function(e) {
             e.preventDefault();
             window.location = "${createLink(action:'scheduleDeletedImagesPurge')}";
         });

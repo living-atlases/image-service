@@ -27,12 +27,12 @@
 
     <script>
 
-        $("#btnCancel").click(function(e) {
+        $("#btnCancel").on('click', function(e) {
             e.preventDefault();
             $('#ingestModal').modal('hide');
         });
 
-        $("#btnCreateNewField").click(function(e) {
+        $("#btnCreateNewField").on('click', function(e) {
             e.preventDefault();
             var name = encodeURIComponent($("#fieldName").val());
             var type = encodeURIComponent($("#fieldType").val());

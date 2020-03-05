@@ -11,7 +11,7 @@
 </div>
 <script>
 
-    $("#btnYes").click(function(e) {
+    $("#btnYes").on('click', function(e) {
         e.preventDefault();
         if (imgvwr.areYouSureOptions && imgvwr.areYouSureOptions.affirmativeAction) {
             imgvwr.areYouSureOptions.affirmativeAction();
@@ -19,7 +19,7 @@
         imgvwr.hideModal();
     });
 
-    $("#btnNo").click(function(e) {
+    $("#btnNo").on('click', function(e) {
         e.preventDefault();
         if (imgvwr.areYouSureOptions && imgvwr.areYouSureOptions.negativeAction) {
             imgvwr.areYouSureOptions.negativeAction();

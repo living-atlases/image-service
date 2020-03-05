@@ -37,7 +37,7 @@
     </body>
     <script>
         $(document).ready(function() {
-            $("#btnSearch").click(function(e) {
+            $("#btnSearch").on('click', function(e) {
                 e.preventDefault();
                 window.location = "${createLink(controller:'search', action: 'list')}?q=" + $("#search").val();
             });

@@ -1,5 +1,6 @@
 package au.org.ala.images
 
+import grails.core.GrailsApplication
 import grails.plugins.rest.client.RestBuilder
 import grails.plugins.rest.client.RestResponse
 import grails.testing.mixin.integration.Integration
@@ -18,20 +19,28 @@ class ImageUploadSpec extends Specification {
 
     @Shared RestBuilder rest = new RestBuilder()
 
+    GrailsApplication grailsApplication
+
+    private String getBaseUrl() {
+        def serverContextPath = grailsApplication.config.getProperty('server.contextPath', String, '')
+        def url = "http://localhost:${serverPort}${serverContextPath}"
+        return url
+    }
+
     def setup() {}
 
     def cleanup() {}
 
     void "test home page"() {
         when:
-        RestResponse resp = rest.get("http://localhost:${serverPort}")
+        RestResponse resp = rest.get("${baseUrl}")
         then:
         resp.status == 200
     }
 
     void "test upload image - empty request - should result in 400"() {
         when:
-        RestResponse resp = rest.post("http://localhost:${serverPort}/ws/uploadImagesFromUrls", [:])
+        RestResponse resp = rest.post("${baseUrl}/ws/uploadImagesFromUrls", [:])
         then:
         resp.status == 400
     }
@@ -41,7 +50,7 @@ class ImageUploadSpec extends Specification {
         MultiValueMap<String, String> form = new LinkedMultiValueMap<String, String>()
         form.add("imageUrl", "https://www.ala.org.au/app/uploads/2019/05/palm-cockatoo-by-Alan-Pettigrew-1920-1200-CCBY-28072018-640x480.jpg")
 
-        RestResponse resp = rest.post("http://localhost:${serverPort}/ws/uploadImage", {
+        RestResponse resp = rest.post("${baseUrl}/ws/uploadImage", {
             contentType("application/x-www-form-urlencoded")
             body(form)
         })
@@ -55,10 +64,10 @@ class ImageUploadSpec extends Specification {
         def url1 = "https://www.ala.org.au/app/uploads/2019/05/mycena-epipterygia-by-Reiner-Richter-CCBYNCInt-26052018-1920-1200--640x480.jpg"
         def url2 = "https://www.ala.org.au/app/uploads/2019/06/Rufous-Betting-by-Graham-Armstrong-CCBY-25-Apr-2019-1920-x-1200-640x480.jpg"
 
-        RestResponse resp = rest.post("http://localhost:${serverPort}/ws/uploadImagesFromUrls",{
-           json {
-               [images:[[sourceURL:url1], [sourceURL: url2]]]
-           }
+        RestResponse resp = rest.post("${baseUrl}/ws/uploadImagesFromUrls",{
+            json {
+                [images:[[sourceURL:url1], [sourceURL: url2]]]
+            }
         })
 
         then:
@@ -73,7 +82,7 @@ class ImageUploadSpec extends Specification {
         def url2 = "https://www.ala.org.au/app/uploads/2019/06/Rufous-Betting-by-Graham-Armstrong-CCBY-25-Apr-2019-1920-x-1200-640x480.jpg"
 
 
-        RestResponse resp = rest.post("http://localhost:${serverPort}/ws/uploadImagesFromUrls",{
+        RestResponse resp = rest.post("${baseUrl}/ws/uploadImagesFromUrls",{
             json {
                 [images:[[sourceUrl:url1], [sourceUrl: url2]]]
             }
@@ -96,7 +105,7 @@ class ImageUploadSpec extends Specification {
 
         MultiValueMap<String, String> form = new LinkedMultiValueMap<String, String>()
         form.add("imageUrl", "https://static.inaturalist.org/photos/35335345/original.jpeg?1555821308")
-        RestResponse resp = rest.post("http://localhost:${serverPort}/ws/uploadImage", {
+        RestResponse resp = rest.post("${baseUrl}/ws/uploadImage", {
             contentType("application/x-www-form-urlencoded")
             body(form)
         })
@@ -104,7 +113,7 @@ class ImageUploadSpec extends Specification {
 
         MultiValueMap<String, String> form2 = new LinkedMultiValueMap<String, String>()
         form2.add("imageUrl", "https://static.inaturalist.org/photos/35335341/original.jpeg?1555821307")
-        RestResponse resp2 = rest.post("http://localhost:${serverPort}/ws/uploadImage", {
+        RestResponse resp2 = rest.post("${baseUrl}/ws/uploadImage", {
             contentType("application/x-www-form-urlencoded")
             body(form2)
         })
@@ -123,7 +132,7 @@ class ImageUploadSpec extends Specification {
 
         File imageFile = new File("src/integration-test/resources/test.jpg")
 
-        RestResponse resp = rest.post("http://localhost:${serverPort}/ws/uploadImage") {
+        RestResponse resp = rest.post("${baseUrl}/ws/uploadImage") {
             contentType "multipart/form-data"
             setProperty "image", imageFile
         }

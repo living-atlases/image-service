@@ -58,18 +58,18 @@
     <script>
         $(document).ready(function() {
 
-            $("#btnStartImageImport").click(function(e) {
+            $("#btnStartImageImport").on('click', function(e) {
                 e.preventDefault();
                 $.ajax("${createLink(controller:'webService', action:'scheduleInboxPoll', params: [userId:AuthenticationUtils.getUserId(request)])}").done(function(results) {
                     $("#startMessage").html('<div class="alert alert-info">Import started with batch id ' + results.importBatchId + '</div>' );
                 });
             });
 
-            $('#btnRefreshFileList').click(function(e) {
+            $('#btnRefreshFileList').on('click', function(e) {
                 renderFileList();
             });
 
-            $("#btnAddField").click(function(e) {
+            $("#btnAddField").on('click', function(e) {
                 e.preventDefault();
                 $.ajax("${createLink(action:'addFieldFragment')}").done(function(content) {
                     $("#ingestModal .modal-title").html("Add field");
@@ -92,7 +92,7 @@
             $.ajax("${createLink(action:"fieldDefinitionsFragment")}").done(function(content) {
                 $("#fieldDefinitions").html(content);
                 // Delete buttons
-                $(".btnDeleteFieldDefinition").click(function(e) {
+                $(".btnDeleteFieldDefinition").on('click', function(e) {
                     e.preventDefault();
                     var fieldId = $(this).closest("[fieldDefinitionId]").attr("fieldDefinitionId");
                     if (fieldId) {
@@ -102,7 +102,7 @@
                     }
                 });
                 // Edit buttons
-                $(".btnEditFieldDefinition").click(function(e) {
+                $(".btnEditFieldDefinition").on('click', function(e) {
                     e.preventDefault();
                     var fieldId = $(this).closest("[fieldDefinitionId]").attr("fieldDefinitionId");
                     if (fieldId) {

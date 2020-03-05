@@ -136,7 +136,7 @@
 
                 imgvwr.bindTooltips("a.fieldHelp", 650);
 
-                $(".btnDeleteStagedFile").click(function (e) {
+                $(".btnDeleteStagedFile").on('click', function (e) {
                     e.preventDefault();
                     var stagedFileId = $(this).closest("[stagedFileId]").attr("stagedFileId");
                     if (stagedFileId) {
@@ -144,7 +144,7 @@
                     }
                 });
 
-                $("#btnSelectImages").click(function(e) {
+                $("#btnSelectImages").on('click', function(e) {
                     e.preventDefault();
                     var opts = {
                         title:"Upload images to the staging area",
@@ -154,7 +154,7 @@
                     imgvwr.showModal(opts);
                 });
 
-                $("#btnUploadDataFile").click(function(e) {
+                $("#btnUploadDataFile").on('click', function(e) {
                     e.preventDefault();
                     var options = {
                         title: "Upload a data file",
@@ -163,12 +163,12 @@
                     imgvwr.showModal(options);
                 });
 
-                $("#btnClearDataFile").click(function(e) {
+                $("#btnClearDataFile").on('click', function(e) {
                     e.preventDefault();
                     window.location = "${createLink(controller:'image', action:'clearStagingDataFile')}";
                 });
 
-                $(".btnAddFieldDefinition").click(function(e) {
+                $(".btnAddFieldDefinition").on('click', function(e) {
                     e.preventDefault();
                     var options = {
                         title: "Add column definition",
@@ -177,7 +177,7 @@
                     imgvwr.showModal(options);
                 });
 
-                $(".btnDeleteField").click(function(e) {
+                $(".btnDeleteField").on('click', function(e) {
                     e.preventDefault();
                     var fieldId = $(this).parents("[columnDefinitionId]").attr("columnDefinitionId");
                     if (fieldId) {
@@ -185,7 +185,7 @@
                     }
                 });
 
-                $(".btnEditField").click(function(e) {
+                $(".btnEditField").on('click', function(e) {
                     e.preventDefault();
                     var fieldId = $(this).parents("[columnDefinitionId]").attr("columnDefinitionId");
                     if (fieldId) {
@@ -197,7 +197,7 @@
                     }
                 });
 
-                $("#btnUploadStagedImages").click(function(e) {
+                $("#btnUploadStagedImages").on('click', function(e) {
                     e.preventDefault();
                     var areOccurrences = $("#areOccurrences").is(':checked');
                     window.location.href = "${createLink(controller:'image', action:'uploadStagedImages')}?harvestable=" + areOccurrences;

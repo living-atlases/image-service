@@ -79,12 +79,12 @@
                                 }, 1000);
                             }
 
-                            $("#btnCancelCSVFileUpload").click(function(e) {
+                            $("#btnCancelCSVFileUpload").on('click', function(e) {
                                 e.preventDefault();
                                 imglib.hideModal();
                             });
 
-                            $("#btnUploadCSVImagesFile").click(function(e) {
+                            $("#btnUploadCSVImagesFile").on('click', function(e) {
                                 e.preventDefault();
 
                                 var formData = new FormData($("#csvFileUploadForm").get(0));
@@ -159,7 +159,7 @@
             </div>
             <script>
                 $(document).ready(function() {
-                    $("#btnUploadFromCSV").click(function(e) {
+                    $("#btnUploadFromCSV").on('click', function(e) {
                         var opts = {
                             url:"${createLink(controller:'imageClient', action:'uploadFromCSVFragment')}",
                             title:"Upload images from CSV"

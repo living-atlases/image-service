@@ -60,12 +60,12 @@
         <script>
 
         $(document).ready(function() {
-            $("#btnAddCriteria").click(function (e) {
+            $("#btnAddCriteria").on('click', function (e) {
                 e.preventDefault();
                 $('#addCriteriaModal').modal('show');
             });
 
-            $("#btnStartOver").click(function(e) {
+            $("#btnStartOver").on('click', function(e) {
                 e.preventDefault();
                 $.ajax("${createLink(action:"ajaxClearSearchCriteria", controller:"search")}").done(function() {
                     renderCriteria();
@@ -73,7 +73,7 @@
                 });
             });
 
-            $("#btnSearch").click(function(e) {
+            $("#btnSearch").on('click', function(e) {
                 e.preventDefault();
                 doSearch();
             });
@@ -131,7 +131,7 @@
                 $("#searchResults").html('<div>Searching...<img src="${resource(dir:'images', file:'spinner.gif')}"></img></div>');
                 $.ajax(url).done(function(content) {
                     $("#searchResults").html(content);
-                    $(".pagination a").click(function(e) {
+                    $(".pagination a").on('click', function(e) {
                         e.preventDefault();
                         doAjaxSearch($(this).attr("href"));
                     });

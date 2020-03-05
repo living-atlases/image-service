@@ -7,7 +7,7 @@
               model="${[images: imageList, totalImageCount: totalCount, allowSelection: true, selectedImageMap: selectedImageMap, thumbsTitle: "${totalCount} matching images", toolButtons: toolButtons]}" />
 </div>
 <script>
-    $("#btnSelectAllImages").click(function(e) {
+    $("#btnSelectAllImages").on('click', function(e) {
         e.preventDefault();
         imgvwr.showSpinner("Selecting images...")
         $.ajax("${createLink(controller: 'search', action: 'ajaxSelectAllCurrentQuery')}").done(function() {

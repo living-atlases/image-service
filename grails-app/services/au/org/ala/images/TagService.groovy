@@ -1,7 +1,9 @@
 package au.org.ala.images
 
+import grails.gorm.transactions.Transactional
 import org.springframework.web.multipart.MultipartFile
 
+@Transactional
 class TagService {
 
     def logService

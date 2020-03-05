@@ -23,7 +23,7 @@
 
 </div>
 <script>
-    $("#btnCancelUpload").click(function(e) {
+    $("#btnCancelUpload").on('click', function(e) {
         e.preventDefault();
         $('#tagModal').modal('hide');
     });

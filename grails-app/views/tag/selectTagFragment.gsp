@@ -36,12 +36,12 @@
         }
     }).focus();
 
-    $("#btnSearchTags").click(function(e) {
+    $("#btnSearchTags").on('click', function(e) {
         e.preventDefault();
         loadTagTree();
     });
 
-    $("#btnAddAndSelectTag").click(function(e) {
+    $("#btnAddAndSelectTag").on('click', function(e) {
         e.preventDefault();
         var parentTagId = getSelectedTagId();
         imgvwr.hideModal();
@@ -52,7 +52,7 @@
         });
     });
 
-    $("#btnCancelAttachTag").click(function(e) {
+    $("#btnCancelAttachTag").on('click', function(e) {
         e.preventDefault();
         imgvwr.hideModal();
     });
@@ -64,7 +64,7 @@
         }
     }
 
-    $("#btnSelectTag").click(function(e) {
+    $("#btnSelectTag").on('click', function(e) {
         e.preventDefault();
         selectCurrentTag();
     });

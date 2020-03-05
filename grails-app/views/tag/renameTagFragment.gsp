@@ -21,12 +21,12 @@
         $(this).select();
     });
 
-    $("#btnCancelRenameTag").click(function(e) {
+    $("#btnCancelRenameTag").on('click', function(e) {
         e.preventDefault();
         $('#tagModal').modal('hide');
     });
 
-    $("#btnRenameTag").click(function(e) {
+    $("#btnRenameTag").on('click', function(e) {
         e.preventDefault();
         var newSuffix = $("#tag").val();
         if (newSuffix) {

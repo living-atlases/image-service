@@ -61,22 +61,22 @@
 
         $(document).ready(function() {
 
-            $("#btnCreateNewTag").click(function(e) {
+            $("#btnCreateNewTag").on('click', function(e) {
                 e.preventDefault();
                 createTag();
             });
 
-            $("#btnRenameSelectedTag").click(function(e) {
+            $("#btnRenameSelectedTag").on('click', function(e) {
                 e.preventDefault();
                 renameSelectedTag();
             });
 
-            $("#btnDeleteSelectedTag").click(function(e) {
+            $("#btnDeleteSelectedTag").on('click', function(e) {
                 e.preventDefault();
                 deleteSelectedTag();
             });
 
-            $("#btnUploadTags").click(function(e) {
+            $("#btnUploadTags").on('click', function(e) {
                 e.preventDefault();
                 $.ajax("${createLink(action:'uploadTagsFragment')}").done(function(content) {
                     $("#tagModal .modal-title").html("Upload tags - select a file to upload");
@@ -92,7 +92,7 @@
                 }
             }).focus();
 
-            $("#btnSearchTags").click(function(e) {
+            $("#btnSearchTags").on('click', function(e) {
                 e.preventDefault();
                 loadTagTree();
             });

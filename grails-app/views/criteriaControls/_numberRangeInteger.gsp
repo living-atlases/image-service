@@ -64,7 +64,7 @@
 
     $(document).ready(function() {
 
-        $(".radioButton").click(function(e) {
+        $(".radioButton").on('click', function(e) {
             var operator = $(this).val();
             if (operator == "bt") {
                 $(".numberRangeOther").css("display", "inline-block");

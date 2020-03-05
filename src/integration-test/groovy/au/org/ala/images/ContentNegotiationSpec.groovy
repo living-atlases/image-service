@@ -13,9 +13,9 @@ import org.eclipse.jetty.servlet.ServletHolder
 import org.springframework.util.LinkedMultiValueMap
 import org.springframework.util.MultiValueMap
 import spock.lang.Shared
-import spock.lang.Specification
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.Method
+import spock.lang.Specification
 
 import java.security.MessageDigest
 
@@ -30,9 +30,14 @@ class ContentNegotiationSpec extends Specification {
     @Shared RestBuilder rest = new RestBuilder()
 
     def imageId
-
     def grailsApplication
     Server server
+
+    private String getBaseUrl() {
+        def serverContextPath = grailsApplication.config.getProperty('server.contextPath', String, '')
+        def url = "http://localhost:${serverPort}${serverContextPath}"
+        return url
+    }
 
     def setup() {
 
@@ -49,10 +54,11 @@ class ContentNegotiationSpec extends Specification {
         // Start Server
         server.start()
 
+
         MultiValueMap<String, String> form = new LinkedMultiValueMap<String, String>()
         form.add("imageUrl", "https://upload.wikimedia.org/wikipedia/commons/e/ed/Puma_concolor_camera_trap_Arizona_2.jpg")
 
-        RestResponse resp = rest.post("http://localhost:${serverPort}/ws/uploadImage", {
+        RestResponse resp = rest.post("${baseUrl}/ws/uploadImage", {
             contentType("application/x-www-form-urlencoded")
             body(form)
         })
@@ -76,7 +82,7 @@ class ContentNegotiationSpec extends Specification {
      */
     void "Test accept: application/json"() {
         when:
-        RestResponse resp = rest.get("http://localhost:${serverPort}/image/" + imageId){
+        RestResponse resp = rest.get("${baseUrl}/image/${imageId}"){
             accept "application/json"
         }
 
@@ -93,7 +99,7 @@ class ContentNegotiationSpec extends Specification {
      */
     void "Test accept: application/json with expected 404"() {
         when:
-        RestResponse resp = rest.get("http://localhost:${serverPort}/image/ABC"){
+        RestResponse resp = rest.get("${baseUrl}/image/ABC"){
             accept "application/json"
         }
 
@@ -110,7 +116,7 @@ class ContentNegotiationSpec extends Specification {
      */
     void "Test WS accept: application/json with expected 404"() {
         when:
-        RestResponse resp = rest.get("http://localhost:${serverPort}/image/ABC"){
+        RestResponse resp = rest.get("${baseUrl}/image/ABC"){
             accept "application/json"
         }
 
@@ -128,7 +134,7 @@ class ContentNegotiationSpec extends Specification {
     void "Test accept: image/jpeg"() {
         when:
 
-        def imageInBytes = new HTTPBuilder("http://localhost:${serverPort}/image/" + imageId).request(Method.GET, "image/jpeg") {
+        def imageInBytes = new HTTPBuilder("${baseUrl}/image/${imageId}").request(Method.GET, "image/jpeg") {
             requestContentType = "image/jpeg"
             response.success = { resp, binary ->
                 return binary.bytes
@@ -153,7 +159,7 @@ class ContentNegotiationSpec extends Specification {
     void "Test accept: image/jpeg - 404"() {
         when:
         def failresp
-        def imageInBytes = new HTTPBuilder("http://localhost:${serverPort}/image/ABC").request(Method.GET, "image/jpeg") {
+        def imageInBytes = new HTTPBuilder("${baseUrl}/image/ABC").request(Method.GET, "image/jpeg") {
             requestContentType = "image/jpeg"
             response.failure = { failresp_inner ->
                 failresp = failresp_inner

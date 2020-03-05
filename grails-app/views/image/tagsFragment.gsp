@@ -21,7 +21,7 @@
 <script>
 
     $(document).ready(function() {
-        $("#btnAttachTag").click(function(e) {
+        $("#btnAttachTag").on('click', function(e) {
             e.preventDefault();
 
             imgvwr.selectTag(function(tagId) {
@@ -35,7 +35,7 @@
             });
         });
 
-        $(".btnDetachTag").click(function(e) {
+        $(".btnDetachTag").on('click', function(e) {
             e.preventDefault();
             var tagId = $(this).attr("tagId");
             $.ajax("${createLink(controller:'webService', action:'detachTagFromImage', id: imageInstance.imageIdentifier)}?tagID=" + tagId).done(function() {
