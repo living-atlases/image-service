@@ -1,3 +1,9 @@
+image-service (1.0.14-1) unstable; urgency=medium
+
+  * Merge with develop
+
+ -- Vicente J. Ruiz Jurado <vjrj@gbif.es>  Wed, 10 Jun 2020 19:30:14 +0200
+
 image-service (1.0.13-2) unstable; urgency=medium
 
   * Improved configuration. Updated exec. Fix typo
