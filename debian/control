@@ -13,7 +13,8 @@ Vcs-Git: https://github.com/AtlasOfLivingAustralia/image-service.git
 
 Package: ala-image
 Architecture: all
-Depends: ${misc:Depends}, openjdk-8-jdk, ca-certificates, libpq-dev, python-psycopg2, postgresql-10, postgresql-contrib-10, dbconfig-pgsql | dbconfig-no-thanks, python-pycurl, libpq-dev, postgresql-10-postgis-2.4, postgresql-10-postgis-2.4-scripts, gdal-bin, python-pycurl, libpq-dev, openjfx
+Pre-Depends: openjdk-8-jdk, ca-certificates
+Depends: ${misc:Depends}, libpq-dev | dbconfig-no-thanks, python-psycopg2 | dbconfig-no-thanks, postgresql-10 | dbconfig-no-thanks, postgresql-contrib-10 | dbconfig-no-thanks, dbconfig-pgsql | dbconfig-no-thanks, postgresql-10-postgis-2.4 | dbconfig-no-thanks, postgresql-10-postgis-2.4-scripts | dbconfig-no-thanks, gdal-bin | dbconfig-no-thanks, python-pycurl | dbconfig-no-thanks, openjfx
 Suggests: apache2 | nginx
 Description: The Image storage and webservices application
  This package contains the ala-image package from
