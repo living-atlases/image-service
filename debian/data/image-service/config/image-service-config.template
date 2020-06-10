@@ -1,20 +1,33 @@
 grails:
-  serverURL: "http://localhost:8080"
+  serverURL: "http://localhost:9003"
+
+server:
+  port: 9003
 
 security:
   cas:
-    appServerName: "http://localhost:8080"
+    appServerName: "http://localhost:9003"
     bypass: true
     disableCAS: true
+    casServerName: https://auth.l-a.site
+    casServerUrlPrefix: ${security.cas.casServerName}/cas
+    casServerLoginUrl: ${security.cas.casServerUrlPrefix}/login
+    casServerLogoutUrl: ${security.cas.casServerUrlPrefix}/logout
+    loginUrl: ${security.cas.casServerUrlPrefix}/login
+    logoutUrl: ${security.cas.casServerUrlPrefix}/logout
   apikey:
     ip:
       whitelist: 
     check:
       serviceUrl: http://auth.l-a.site/apikey/ws/check?apikey=
+
+userDetails:
+  url: ${security.cas.casServerName}/userdetails/
+
 info:
   app:
     name: 'image-service'
-    version: '1.0.6'
+    version: '1.0.13'
     grailsVersion: '3.2.11'
 
 hibernate:
@@ -30,15 +43,16 @@ imageservice:
   imagestore:
     root: "/data/image-service/store"
   apache:
-    root: "http://localhost:8880/store/"
-    multiple_roots: "http://localhost:8880/store/"
+    root: "http://localhost:9003/store/"
+    multiple_roots: "http://localhost:9003/store/"
     exportDir: "/data/image-service/exports"
 
 # skin
 skin:
-  layout: generic
-  favicon: "https://www.ala.org.au/wp-content/themes/ala-wordpress-theme/img/favicon/favicon-16x16.png"
+  layout: main
+  favicon: "https://www.gbif.org/favicon.ico"
   orgNameLong: Living Atlas Of Wakanda
+  homeUrl: "http://www.ala.org.au"
 
 collectory:
   baseURL: "http://collections.l-a.site"
